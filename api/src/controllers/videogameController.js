@@ -8,18 +8,16 @@ const getApiInfo = async () => {
     await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=15`)
   ).data.results;
 
-  const gamesClean = rawGames.map(el => {
-    const genres = el.genres.map(genre => {
-      return genre.name;
-    })
+  const gamesClean = rawGames.map((el) => {
+    const genres = el.genres.map((genre) => genre.name);
     return {
       imagen: el.background_image,
       nombre: el.name,
-      generos: genres
-    }
-  })
+      generos: genres,
+    };
+  });
 
-  return gamesClean
+  return gamesClean;
 };
 
 const getDbInfo = async () => {
@@ -34,20 +32,21 @@ const getDbInfo = async () => {
     ],
   });
 
-  const dbClean = dbRaw.map((e) => {
-    
-    return {
-      id: e.dataValues.id,
-      name: e.dataValues.name,
-      description: e.dataValues.description,
-      platforms: e.dataValues.platforms,
-      image: e.dataValues.image,
-      release_date: e.dataValues.release_date,
-      rating: e.dataValues.rating,
-    };
-  });
+  if (dbRaw) {
+    const dbClean = dbRaw.map((e) => {
+      return {
+        id: e.dataValues.id,
+        name: e.dataValues.name,
+        description: e.dataValues.description,
+        platforms: e.dataValues.platforms,
+        image: e.dataValues.image,
+        release_date: e.dataValues.release_date,
+        rating: e.dataValues.rating,
+      };
+    });
 
-  return dbClean;
+    return dbClean;
+  } else return [];
 };
 
 const getAll = async () => {
@@ -73,6 +72,28 @@ const searchByName = async (name) => {
   return [...filteredApi, ...dbInfo];
 };
 
+const getDetail = async (id) => {
+  const gameRaw = (await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)).data;
+  
+  const gameClean = gameRaw.map(el => {
+
+    const platforms = el.platforms.map(platform => platform.name)
+    const genres = el.genres.map(genre => genre.name)
+
+    return {
+      id: el.id,
+      nombre: el.name,
+      imagen: el.background_image,
+      plataformas: platforms,
+      fecha_lanzamiento: el.released,
+      rating: el.rating,
+      generos: genres
+    }
+  })
+
+  return gameClean
+}
+
 const searchById = async (id, source) => {
   const game =
     source === "db"
@@ -85,7 +106,8 @@ const searchById = async (id, source) => {
             },
           },
         })
-      : (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}/${id}`)).data;
+      : getDetail(id);
+      
   return game;
 };
 
