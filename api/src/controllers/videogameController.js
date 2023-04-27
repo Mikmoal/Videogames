@@ -63,13 +63,23 @@ const searchByName = async (name) => {
     where: { name },
   });
 
-  const apiInfo = await getApiInfo();
+  const apiInfo = (await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&search=${name}`)).data.results;
+  //console.log(apiInfo);
 
-  const filteredApi = apiInfo.filter((game) =>
-    game.nombre.toLowerCase().includes(name.toLowerCase())
-  );
+  const apiInfoClean = apiInfo.map(el => {
+    const genres = el.genres.map((genre) => genre.name);
+    return {
+      imagen: el.background_image,
+      nombre: el.name,
+      generos: genres,
+    };
+  })
+  // const filteredApi = apiInfo.filter((game) =>
+  //   game.nombre.toLowerCase().includes(name.toLowerCase())
+  // );
 
-  return [...filteredApi, ...dbInfo];
+  return [...apiInfoClean, ...dbInfo];
+  //return apiInfoClean;
 };
 
 const getDetail = async (id) => {
