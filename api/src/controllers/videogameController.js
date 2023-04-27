@@ -66,33 +66,30 @@ const searchByName = async (name) => {
   const apiInfo = await getApiInfo();
 
   const filteredApi = apiInfo.filter((game) =>
-    game.name.toLowerCase().includes(name.toLowerCase())
+    game.nombre.toLowerCase().includes(name.toLowerCase())
   );
 
   return [...filteredApi, ...dbInfo];
 };
 
 const getDetail = async (id) => {
-  const gameRaw = (await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)).data;
+  const gameRaw = (
+    await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`)
+  ).data;
   
-  const gameClean = gameRaw.map(el => {
+  const platforms = gameRaw.parent_platforms.map((platform) => platform.platform.name);
+  const genres = gameRaw.genres.map((genre) => genre.name);
 
-    const platforms = el.platforms.map(platform => platform.name)
-    const genres = el.genres.map(genre => genre.name)
-
-    return {
-      id: el.id,
-      nombre: el.name,
-      imagen: el.background_image,
-      plataformas: platforms,
-      fecha_lanzamiento: el.released,
-      rating: el.rating,
-      generos: genres
-    }
-  })
-
-  return gameClean
-}
+  return {
+    id: gameRaw.id,
+    nombre: gameRaw.name,
+    imagen: gameRaw.background_image,
+    plataformas: platforms,
+    fecha_lanzamiento: gameRaw.released,
+    rating: gameRaw.rating,
+    generos: genres,
+  };
+};
 
 const searchById = async (id, source) => {
   const game =
@@ -107,7 +104,7 @@ const searchById = async (id, source) => {
           },
         })
       : getDetail(id);
-      
+
   return game;
 };
 
