@@ -31,7 +31,6 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
   try {
     const {
-      id,
       name,
       description,
       platforms,
@@ -41,7 +40,6 @@ const create = async (req, res) => {
       genres,
     } = req.body;
     const newGame = await createVideogame(
-      id,
       name,
       description,
       platforms,

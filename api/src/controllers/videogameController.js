@@ -89,10 +89,12 @@ const getDetail = async (id) => {
   
   const platforms = gameRaw.parent_platforms.map((platform) => platform.platform.name);
   const genres = gameRaw.genres.map((genre) => genre.name);
+  const description = gameRaw.tags.map(tag => tag.name);
 
   return {
     id: gameRaw.id,
     nombre: gameRaw.name,
+    descripcion: description,
     imagen: gameRaw.background_image,
     plataformas: platforms,
     fecha_lanzamiento: gameRaw.released,
@@ -119,7 +121,6 @@ const searchById = async (id, source) => {
 };
 
 const createVideogame = async (
-  id,
   name,
   description,
   platforms,
@@ -130,7 +131,6 @@ const createVideogame = async (
 ) => {
   const newGame = (
     await Videogame.create({
-      id,
       name,
       description,
       platforms,
