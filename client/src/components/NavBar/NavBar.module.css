@@ -1,0 +1,23 @@
+.mainContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ffc107;
+    padding: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    
+}
+
+.mainContainer a {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.mainContainer a:hover {
+    color: #ff5722;
+    transform: scale(1.1);
+}

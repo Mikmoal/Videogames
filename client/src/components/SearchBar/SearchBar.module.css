@@ -1,0 +1,44 @@
+/* Estilos para el search bar */
+.search_bar {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 20px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Estilos para el input */
+  .search_bar input[type="search"] {
+    border: none;
+    outline: none;
+    margin-left: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ff5722;
+    background-color: transparent;
+    width: 300px;
+  }
+  
+  /* Estilos para el botón de búsqueda */
+  .search_bar button {
+    background-color: #ff5722;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin-left: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Estilos para el hover del botón de búsqueda */
+  .search_bar button:hover {
+    background-color: #fff;
+    color: #ff5722;
+    border: 2px solid #ff5722;
+    cursor: pointer;
+  }
+  
