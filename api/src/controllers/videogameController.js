@@ -11,6 +11,7 @@ const getApiInfo = async () => {
   const gamesClean = rawGames.map((el) => {
     const genres = el.genres.map((genre) => genre.name);
     return {
+      id: el.id,
       imagen: el.background_image,
       nombre: el.name,
       generos: genres,

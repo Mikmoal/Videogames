@@ -4,21 +4,19 @@ import { getId } from "../../redux/actions";
 import loading from "../../loading.gif";
 
 function renderizarDetail(videogame) {
-  console.log("se ejecuta renderizarDetail");
-  const genres = videogame.genres.map((element) => {
-    return element.genre.name;
-  });
+  //console.log("se ejecuta renderizarDetail");
+  
 
   return (
     <div key={videogame.id}>
-      <img src={videogame.image} alt={videogame.name} />
+      <img src={videogame.imagen} alt={videogame.nombre} />
       <p>ID: {videogame.id}</p>
-      <p>Name: {videogame.name}</p>
-      <p>Description: {videogame.description}</p>
-      <p>Platforms: {videogame.platforms}</p>
-      <p>Release date: {videogame.release_date}</p>
+      <p>Name: {videogame.nombre}</p>
+      <p>Description: {videogame.descripcion}</p>
+      <p>Platforms: {videogame.plataformas}</p>
+      <p>Release date: {videogame.fecha_lanzamiento}</p>
       <p>Rating: {videogame.rating}</p>
-      <p>Genres: {genres.join(', ')}</p>
+      <p>Genres: {videogame.generos.join(', ')}</p>
     </div>
   )
 }
@@ -32,8 +30,8 @@ export default function Detail(props) {
   }, [dispatch, props.match.params.id])
 
   const videogame = useSelector((state) => state.Details)
-  // console.log(Array.isArray(videogame))
-  // console.log("este es lo que trae del state: " + videogame)
+   console.log(Array.isArray(videogame))
+   console.log(videogame)
 
 
 

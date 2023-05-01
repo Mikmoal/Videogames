@@ -21,6 +21,7 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(15);
 
+  console.log(videogamesArr);
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -54,13 +55,13 @@ function Home() {
             <Card
             key={e.id}
             id={e.id}
-            name={e.name}
+            name={e.nombre}
             description={e.description}
             platforms={e.platforms}
-            image={e.image}
+            image={e.imagen}
             release_date={e.release_date}
             rating={e.rating}
-            genres={e.genres}
+            genres={e.generos}
             />
           ))}
           </div>
