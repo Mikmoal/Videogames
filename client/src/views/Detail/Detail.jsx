@@ -8,8 +8,8 @@ function renderizarDetail(videogame) {
   
 
   return (
-    <div key={videogame.id}>
-      <img src={videogame.imagen} alt={videogame.nombre} />
+    <div key={videogame.id} >
+      <img src={videogame.imagen} alt={videogame.nombre} width={"300px"}/>
       <p>ID: {videogame.id}</p>
       <p>Name: {videogame.nombre}</p>
       <p>Description: {videogame.descripcion}</p>

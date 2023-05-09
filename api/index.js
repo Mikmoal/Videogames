@@ -23,7 +23,7 @@ const {getGenresController} = require("./src/controllers/genreController.js");
 
 // Syncing all the models at once.
 conn
-  .sync({ force: true })
+  .sync({ alter: true })
   .then(() => {
     getGenresController();
   })

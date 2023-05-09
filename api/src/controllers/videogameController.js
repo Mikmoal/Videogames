@@ -32,17 +32,20 @@ const getDbInfo = async () => {
       },
     ],
   });
+  
 
   if (dbRaw) {
     const dbClean = dbRaw.map((e) => {
+      const genresClean = e.dataValues.genres.map(g => g.name)
       return {
         id: e.dataValues.id,
-        name: e.dataValues.name,
+        nombre: e.dataValues.name,
         description: e.dataValues.description,
         platforms: e.dataValues.platforms,
-        image: e.dataValues.image,
+        imagen: e.dataValues.image,
         release_date: e.dataValues.release_date,
         rating: e.dataValues.rating,
+        generos: genresClean
       };
     });
 
@@ -95,9 +98,9 @@ const getDetail = async (id) => {
   return {
     id: gameRaw.id,
     nombre: gameRaw.name,
-    descripcion: description,
+    descripcion: Array.isArray(description) ? description.join(", ") : description,
     imagen: gameRaw.background_image,
-    plataformas: platforms,
+    plataformas: Array.isArray(platforms) ? platforms.join(", ") : platforms,
     fecha_lanzamiento: gameRaw.released,
     rating: gameRaw.rating,
     generos: genres,

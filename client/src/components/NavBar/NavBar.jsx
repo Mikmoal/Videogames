@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import SearchBar from "../SearchBar/SearchBar";
 import FilterGenres from "../FilterGenres/FilterGenres";
 import Orders from '../Orders/Orders';
@@ -6,9 +6,14 @@ import FilterVideogames from '../FilterVideogames/FilterVideogames'; //aqui crea
 import style from "./NavBar.module.css"
 
 const NavBar = ({ paginate }) => {
+    const history = useHistory();
+    const handleClick = () => {
+        history.push('/home');
+        window.location.reload();
+    }
     return (
         <div className={style.mainContainer}>
-            <Link to="/home">Home</Link>
+            <Link to="/home" onClick={handleClick}>Home</Link>
             <SearchBar
                 paginate={paginate} />
 

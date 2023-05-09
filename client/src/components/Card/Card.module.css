@@ -6,12 +6,12 @@
 }
 
 .imagenP {
-    margin: 10px auto;
+    margin: 15px ;
     border-radius: 10px;
     border: 1px solid #999;
-    padding: 13px;
+    padding: 20px;
     width: 220px;
-    height: max-content;
+    height: 260px;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-size: cover;
